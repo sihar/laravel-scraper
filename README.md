@@ -23,9 +23,14 @@ Generate dummy data (optional)
 php artisan db:seed --class=TalentProfileSeeder
 ```
 
-Regenerate API documentation
+Generate API documentation
 ```
 php artisan l5-swagger:generate
+```
+
+Open url API documentation
+```
+http://[your_domain]/api/documentation
 ```
 
 ## License
