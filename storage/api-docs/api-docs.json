@@ -1,0 +1,227 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Talent Profile API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/scrape": {
+            "post": {
+                "tags": [
+                    "Scraper"
+                ],
+                "summary": "Scrape a public URL and store structured data",
+                "operationId": "d920e460365a52a7aade3ff6376594b8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "url"
+                                ],
+                                "properties": {
+                                    "url": {
+                                        "type": "string",
+                                        "format": "url",
+                                        "example": "https://example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Scrape completed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "url": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "job_position": {
+                                                    "type": "string"
+                                                },
+                                                "summary_experience": {
+                                                    "type": "string"
+                                                },
+                                                "clients": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Scraping failed"
+                    }
+                }
+            }
+        },
+        "/api/talent-profiles": {
+            "get": {
+                "tags": [
+                    "Talent Profiles"
+                ],
+                "summary": "List all talent profiles",
+                "operationId": "b0e5574a659580e211e27d7f3fab2964",
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Items per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of profiles"
+                    }
+                }
+            }
+        },
+        "/api/talent-profiles/{username}": {
+            "get": {
+                "tags": [
+                    "Talent Profiles"
+                ],
+                "summary": "Get a talent profile by username",
+                "operationId": "ad777259ca6c3b82ed05500d3ea868bc",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Profile found"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/api/talent-profiles/{id}": {
+            "put": {
+                "tags": [
+                    "Talent Profiles"
+                ],
+                "summary": "Update a talent profile",
+                "operationId": "175827e644b5014fa57fe8daddf9f243",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "job_position",
+                                    "username"
+                                ],
+                                "properties": {
+                                    "url": {
+                                        "type": "string"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "job_position": {
+                                        "type": "string"
+                                    },
+                                    "summary_experience": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Profile updated"
+                    },
+                    "404": {
+                        "description": "Profile not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Talent Profiles"
+                ],
+                "summary": "Delete a profile",
+                "operationId": "d1a52dbd378aeaee559eb865f891ecab",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Profile deleted"
+                    },
+                    "404": {
+                        "description": "Profile not found"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Scraper",
+            "description": "Scraper"
+        },
+        {
+            "name": "Talent Profiles",
+            "description": "Talent Profiles"
+        }
+    ]
+}
