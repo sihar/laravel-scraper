@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('talent_profiles', function (Blueprint $table) {
             $table->id();
-            $table->string('url');
+            $table->string('url')->index();
             $table->string('username')->unique()->index();
             $table->string('name')->nullable();
             $table->string('job_position')->nullable();

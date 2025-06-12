@@ -18,6 +18,11 @@ php artisan migrate:fresh
 php artisan serve
 ```
 
+Generate dummy data (optional)
+```
+php artisan db:seed --class=TalentProfileSeeder
+```
+
 ## License
 
 This application is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
