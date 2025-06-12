@@ -72,13 +72,15 @@ class ScrapeController extends Controller
             } else {
                 $data = $this->scraper->scrape($url);
 
-                TalentProfile::create([
+                $talentProfile = TalentProfile::create([
                     'url' => $url,
                     'username' => Str::slug($data['name'] ?? '', '-'),
                     'name' => $data['name'] ?? '',
                     'job_position' => $data['job_position'] ?? '',
                     'summary_experience' => $data['summary_experience'] ?? '',
                 ]);
+
+                return response()->json(['status' => 'success', 'data' => $talentProfile], 201);
             }
 
         } catch (\Exception $e) {
